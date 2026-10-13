@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Allah Don | Portail</title>
+  <meta name="description" content="Allah Don : un groupe spirituel initiatique fondé sur l'islam et la voie soufie. Franchis le seuil et demande le wird du cheikh.">
+  <meta name="theme-color" content="#08161f">
+  <link rel="icon" href="assets/pattern.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@400;500&family=Noto+Sans:wght@400;500&family=Noto+Serif:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" id="skipLink" href="#contenu">Aller au contenu</a>
+
+  <!-- Motif étoile à 8 branches, défini en ligne pour fonctionner aussi en ouvrant le fichier directement -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="star8" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+        <rect x="22" y="22" width="56" height="56"/>
+        <rect x="22" y="22" width="56" height="56" transform="rotate(45 50 50)"/>
+        <circle cx="50" cy="50" r="13" stroke-width="1.2"/>
+      </g>
+      <circle cx="50" cy="50" r="4" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+  <div class="bg-pattern" aria-hidden="true"></div>
+
+  <main id="contenu" class="shell">
+
+    <!-- Choix de la langue -->
+    <div class="lang" id="langGroup" role="group" aria-label="Langue / Kan">
+      <button class="lang__btn" type="button" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
+      <button class="lang__btn" type="button" data-lang="bm" lang="bm" aria-pressed="false">BM</button>
+    </div>
+
+    <!-- Progression (visible pendant les 3 questions) -->
+    <nav class="progress" id="progress" aria-label="Progression" hidden>
+      <ol class="progress__list" id="progressList"></ol>
+    </nav>
+
+    <!-- ÉTAPE 0 : SEUIL -->
+    <section class="step step--hero is-active" id="step-0" data-step="0" aria-labelledby="heroTitle">
+      <p class="basmala" lang="ar" dir="rtl" id="basmala"></p>
+
+      <svg class="star" viewBox="0 0 100 100" aria-hidden="true">
+        <use href="#star8"></use>
+      </svg>
+
+      <h1 class="hero-title" id="heroTitle"></h1>
+      <p class="hero-sub" id="heroSub"></p>
+
+      <!-- Carrousel de la Daara -->
+      <div class="carousel" id="carousel" role="region" aria-roledescription="carrousel" aria-label="Images de la Daara">
+        <div class="carousel__frame">
+          <ul class="carousel__track" id="carouselTrack"></ul>
+          <button class="carousel__btn carousel__btn--prev" id="carPrev" type="button" aria-label="Image précédente">‹</button>
+          <button class="carousel__btn carousel__btn--next" id="carNext" type="button" aria-label="Image suivante">›</button>
+        </div>
+        <p class="carousel__caption" id="carCaption" aria-live="polite"></p>
+        <div class="carousel__dots" id="carDots" role="tablist" aria-label="Choisir une image"></div>
+      </div>
+
+      <button class="btn btn--primary" id="startBtn" type="button"></button>
+    </section>
+
+    <!-- ÉTAPE 1 : QUI ES-TU ? -->
+    <section class="step" id="step-1" data-step="1" aria-labelledby="q1Title" hidden>
+      <h2 class="step__title" id="q1Title"></h2>
+      <p class="step__intro" id="q1Intro"></p>
+
+      <div class="field">
+        <label for="fName" id="lblName"></label>
+        <input id="fName" name="nom" type="text" autocomplete="name" aria-describedby="errName">
+        <p class="field__error" id="errName" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="fAge" id="lblAge"></label>
+        <input id="fAge" name="age" type="text" inputmode="text" autocomplete="off">
+      </div>
+    </section>
+
+    <!-- ÉTAPE 2 : D'OÙ VIENS-TU ? -->
+    <section class="step" id="step-2" data-step="2" aria-labelledby="q2Title" hidden>
+      <h2 class="step__title" id="q2Title"></h2>
+      <p class="step__intro" id="q2Intro"></p>
+
+      <div class="field">
+        <label for="fCountry" id="lblCountry"></label>
+        <input id="fCountry" name="pays" type="text" autocomplete="country-name" aria-describedby="errCountry">
+        <p class="field__error" id="errCountry" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="fCity" id="lblCity"></label>
+        <input id="fCity" name="ville" type="text" autocomplete="address-level2" aria-describedby="errCity">
+        <p class="field__error" id="errCity" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="fPath" id="lblPath"></label>
+        <select id="fPath" name="parcours"></select>
+      </div>
+    </section>
+
+    <!-- ÉTAPE 3 : QUE CHERCHES-TU ? -->
+    <section class="step" id="step-3" data-step="3" aria-labelledby="q3Title" hidden>
+      <h2 class="step__title" id="q3Title"></h2>
+      <p class="step__intro" id="q3Intro"></p>
+
+      <div class="field">
+        <label for="fQuest" id="lblQuest"></label>
+        <textarea id="fQuest" name="quete" rows="6" aria-describedby="errQuest questCount"></textarea>
+        <p class="field__count" id="questCount" aria-live="polite"></p>
+        <p class="field__error" id="errQuest" role="alert"></p>
+      </div>
+    </section>
+
+    <!-- ÉTAPE 4 : RÉCAPITULATIF -->
+    <section class="step" id="step-4" data-step="4" aria-labelledby="rTitle" hidden>
+      <h2 class="step__title" id="rTitle"></h2>
+      <p class="step__intro" id="rIntro"></p>
+
+      <dl class="recap">
+        <div class="recap__item">
+          <dt id="rWhoLbl"></dt>
+          <dd id="rWho"></dd>
+          <button class="link-btn" type="button" data-goto="1"></button>
+        </div>
+        <div class="recap__item">
+          <dt id="rFromLbl"></dt>
+          <dd id="rFrom"></dd>
+          <button class="link-btn" type="button" data-goto="2"></button>
+        </div>
+        <div class="recap__item">
+          <dt id="rSeekLbl"></dt>
+          <dd id="rSeek"></dd>
+          <button class="link-btn" type="button" data-goto="3"></button>
+        </div>
+      </dl>
+
+      <div class="check">
+        <input id="fSincere" type="checkbox" aria-describedby="errSincere">
+        <label for="fSincere" id="lblSincere"></label>
+      </div>
+      <p class="field__error" id="errSincere" role="alert"></p>
+    </section>
+
+    <!-- ÉTAPE 5 : REMERCIEMENT -->
+    <section class="step step--thanks" id="step-5" data-step="5" aria-labelledby="tTitle" hidden>
+      <svg class="star" viewBox="0 0 100 100" aria-hidden="true">
+        <use href="#star8"></use>
+      </svg>
+      <h2 class="step__title" id="tTitle" tabindex="-1"></h2>
+      <p class="step__intro" id="tText"></p>
+      <div class="actions actions--center">
+        <a class="btn btn--primary" id="reopenBtn" href="#" target="_blank" rel="noopener noreferrer"></a>
+        <button class="btn btn--ghost" id="againBtn" type="button"></button>
+      </div>
+    </section>
+
+    <!-- Navigation -->
+    <div class="actions" id="actions" hidden>
+      <button class="btn btn--ghost" id="prevBtn" type="button"></button>
+      <button class="btn btn--primary" id="nextBtn" type="button"></button>
+    </div>
+
+    <footer class="footer">
+      <p id="privacy"></p>
+    </footer>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

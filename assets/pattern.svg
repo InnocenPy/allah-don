@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <!-- Étoile à 8 branches (deux carrés superposés, rotation 45°) -->
+    <g id="star8" fill="none" stroke="#c9a961" stroke-width="1.6" stroke-linejoin="round">
+      <rect x="22" y="22" width="56" height="56"/>
+      <rect x="22" y="22" width="56" height="56" transform="rotate(45 50 50)"/>
+      <circle cx="50" cy="50" r="13" stroke-width="1.2"/>
+      <circle cx="50" cy="50" r="4" fill="#c9a961" stroke="none"/>
+    </g>
+  </defs>
+  <rect width="100" height="100" rx="18" fill="#08161f"/>
+  <use href="#star8"/>
+</svg>
