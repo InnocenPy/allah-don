@@ -26,12 +26,23 @@ const WHATSAPP_MESSAGE_LANG = "fr";
    Ajoutez ou supprimez des lignes librement. */
 const DAARA_IMAGES = [
   {
-    src: "assets/daara/daara-1.svg",
+    src: "assets/daara/porte-daara.png",
     alt:     { fr: "La Daara : lieu d'enseignement", bm: "Daara : kalan yɔrɔ" },
     legende: { fr: "La Daara",                       bm: "Daara" }
   },
+
   {
-    src: "assets/daara/daara-2.svg",
+    src: "assets/daara/kutub.jpg",
+    alt:     { fr: "La Daara : le pole maitre",     bm: "Daara : kutubul wakti" },
+    legende: { fr: "Le maitre spirituel",             bm: "Kutubul wakti" }
+  },
+  {
+    src: "assets/daara/begueti.jpg",
+    alt:     { fr: "La Daara : disciple",     bm: "Daara : kalan denw" },
+    legende: { fr: "Les disciples",             bm: "Kalan denw" }
+  },
+  {
+    src: "assets/daara/cercle.jpg",
     alt:     { fr: "La Daara : cercle de dhikr",     bm: "Daara : zikiri lamini" },
     legende: { fr: "Le cercle du dhikr",             bm: "Zikiri lamini" }
   },
