@@ -47,6 +47,11 @@ const DAARA_IMAGES = [
     legende: { fr: "Le cercle du dhikr",             bm: "Zikiri lamini" }
   },
   {
+    src: "assets/daara/kutubu2.png",
+    alt:     { fr: "La Daara : un héritage spirituel", bm: "Daara : A barika Samba NDJOBDY DIALLO" },
+    legende: { fr: "un héritage spirituel",       bm: "Al barika Samba NDJOBDY DIALLO" }
+  },
+  {
     src: "assets/daara/daara-3.svg",
     alt:     { fr: "La Daara : étude et transmission", bm: "Daara : kalan ni dɔnniya di" },
     legende: { fr: "L'étude et la transmission",       bm: "Kalan ni dɔnniya di" }
@@ -55,6 +60,28 @@ const DAARA_IMAGES = [
 
 /* Durée d'affichage de chaque image, en millisecondes */
 const CAROUSEL_DELAY = 5000;
+
+/* 3 bis. VIDÉOS (section en bas de la page d'accueil)
+   Pour ajouter une vidéo YouTube, copiez une ligne et remplacez :
+   - id    : le code de la vidéo, c'est la partie après « v= » dans le lien
+             youtube.com/watch?v=XXXXXXXXXXX  (ou après « /embed/ » dans le code d'intégration)
+   - titre : le titre affiché, en français et en bamanankan
+   - texte : une courte description (laissez "" pour aucune)
+   Laissez la liste vide ( [] ) pour masquer entièrement la section. */
+const VIDEOS = [
+  {
+    id: "8U6TOojVpHM",
+    titre: { fr: "Kutub Samba Ndjodi DIALLO", bm: "Kutub Samba Ndjodi DIALLO" },
+    texte: { fr: "", bm: "" }
+  }
+];
+
+/* Miniature de la vidéo avant lecture.
+   false = AUCUNE connexion à YouTube tant que le visiteur n'appuie pas sur lecture
+           (cohérent avec la mention de confidentialité du site). Recommandé.
+   true  = affiche l'image de couverture YouTube, mais YouTube reçoit alors l'adresse
+           IP de chaque visiteur dès l'ouverture de la page. */
+const SHOW_VIDEO_THUMBNAILS = false;
 
 /* 4. TEXTES DU SITE
    Chaque langue est un objet complet. Pour ajouter une langue,

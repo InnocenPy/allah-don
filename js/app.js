@@ -163,6 +163,10 @@
     /* Le carrousel ne tourne que sur la page d'accueil */
     if (n === 0) startCarousel(); else stopCarousel();
 
+    /* Les vidéos ne s'affichent que sur la page d'accueil, et s'arrêtent quand on la quitte */
+    $("videos").hidden = !(n === 0 && validVideos().length > 0);
+    if (n !== 0) stopVideos();
+
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     /* Place le focus sur le premier champ ou le titre */
@@ -411,6 +415,109 @@
   function stopCarousel() { if (carTimer) { clearInterval(carTimer); carTimer = null; } }
   function restartCarousel() { if (currentStep === 0) startCarousel(); }
 
+
+
+ /* ---------- Vidéos ---------- */
+  var videoItems = [];   // { v, frame, poster, labelEl, titleEl, textEl, linkEl, thumb }
+
+  function validVideos() {
+    return (typeof VIDEOS !== "undefined" && Array.isArray(VIDEOS) ? VIDEOS : []).filter(function (v) {
+      return v && /^[A-Za-z0-9_-]{11}$/.test(v.id || "");
+    });
+  }
+
+  function buildVideos() {
+    var list = $("videosList");
+    list.innerHTML = "";
+    videoItems = [];
+
+    validVideos().forEach(function (v) {
+      var wrap = document.createElement("article");
+      wrap.className = "video";
+
+      var frame = document.createElement("div");
+      frame.className = "video__frame";
+
+      /* Aucune requête vers YouTube avant le clic : le lecteur n'est créé qu'à la demande */
+      var poster = document.createElement("button");
+      poster.type = "button";
+      poster.className = "video__poster";
+
+      var thumb = null;
+      if (typeof SHOW_VIDEO_THUMBNAILS !== "undefined" && SHOW_VIDEO_THUMBNAILS) {
+        thumb = document.createElement("img");
+        thumb.src = "https://i.ytimg.com/vi/" + v.id + "/hqdefault.jpg";
+        thumb.alt = "";
+        thumb.loading = "lazy";
+        thumb.addEventListener("error", function () { thumb.remove(); });
+        poster.appendChild(thumb);
+      }
+
+      var play = document.createElement("span");
+      play.className = "video__play";
+      play.setAttribute("aria-hidden", "true");
+      poster.appendChild(play);
+      frame.appendChild(poster);
+
+      var titleEl = document.createElement("h3");
+      titleEl.className = "video__title";
+      var textEl = document.createElement("p");
+      textEl.className = "video__text";
+      var linkEl = document.createElement("a");
+      linkEl.className = "video__link";
+      linkEl.href = "https://www.youtube.com/watch?v=" + v.id;
+      linkEl.target = "_blank";
+      linkEl.rel = "noopener noreferrer";
+
+      wrap.appendChild(frame);
+      wrap.appendChild(titleEl);
+      wrap.appendChild(textEl);
+      wrap.appendChild(linkEl);
+      list.appendChild(wrap);
+
+      var item = { v: v, frame: frame, poster: poster, titleEl: titleEl, textEl: textEl, linkEl: linkEl };
+      videoItems.push(item);
+
+      poster.addEventListener("click", function () { playVideo(item); });
+    });
+
+    refreshVideoTexts();
+  }
+
+  function refreshVideoTexts() {
+    videoItems.forEach(function (it) {
+      var title = tr(it.v.titre);
+      var text = tr(it.v.texte);
+      it.titleEl.textContent = title;
+      it.textEl.textContent = text;
+      it.textEl.hidden = !text;
+      it.linkEl.textContent = T.videos.openOn;
+      it.poster.setAttribute("aria-label", fmt(T.videos.play, { title: title }));
+      var iframe = it.frame.querySelector("iframe");
+      if (iframe) iframe.title = title;
+    });
+  }
+
+  function playVideo(it) {
+    var iframe = document.createElement("iframe");
+    iframe.src = "https://www.youtube-nocookie.com/embed/" + it.v.id + "?autoplay=1&rel=0&hl=" + CUR;
+    iframe.title = tr(it.v.titre);
+    iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+    iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+    iframe.setAttribute("allowfullscreen", "");
+    it.frame.replaceChildren(iframe);
+    stopCarousel();   // pas de défilement d'images pendant la lecture
+    carHover = true;
+  }
+
+  /* Remet les vignettes à la place des lecteurs (arrête le son) */
+  function stopVideos() {
+    videoItems.forEach(function (it) {
+      if (it.frame.querySelector("iframe")) it.frame.replaceChildren(it.poster);
+    });
+    carHover = false;
+  }
+
   /* ---------- Changement de langue ---------- */
   function clearErrors() {
     ["errName", "errCountry", "errCity", "errQuest", "errSincere"].forEach(function (id) { $(id).textContent = ""; });
@@ -491,6 +598,7 @@
   function init() {
     fillTexts();
     buildCarousel();
+    buildVideos();
     bindEvents();
     updateCount();
     showStep(0);
