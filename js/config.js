@@ -7,7 +7,7 @@
 /* 1. NUMÉRO WHATSAPP
    Format international, sans « + », sans espaces ni tirets.
    Exemple Mali : "223" + numéro à 8 chiffres  →  "22370123456" */
-const WHATSAPP_NUMBER = "223XXXXXXXX";
+const WHATSAPP_NUMBER = "22396855282";
 
 /* 2. LANGUE
    LANG                  : langue d'ouverture du site ("fr" ou "bm").
@@ -15,8 +15,8 @@ const WHATSAPP_NUMBER = "223XXXXXXXX";
    WHATSAPP_MESSAGE_LANG : langue du message envoyé sur WhatsApp.
                            "auto" = la langue choisie par le visiteur,
                            "fr" ou "bm" = toujours la même langue. */
-const LANG = "fr";
-const WHATSAPP_MESSAGE_LANG = "auto";
+const LANG = "bm";
+const WHATSAPP_MESSAGE_LANG = "fr";
 
 /* 3. IMAGES DE LA DAARA (défilement sur la page d'accueil)
    Déposez vos photos dans le dossier assets/daara/ puis listez-les ici.
@@ -156,7 +156,7 @@ const TEXTS = {
   },
 
   /* ======================= BAMANANKAN =======================
-     ATTENTION : traduction proposée par Claude. À faire relire
+     ATTENTION :  À faire relire
      par un locuteur du bamanankan (et par le cheikh pour les
      termes religieux) avant la mise en ligne. Orthographe
      malienne : ɛ  ɔ  ɲ  ŋ. */
