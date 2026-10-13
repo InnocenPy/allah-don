@@ -33,7 +33,7 @@ const DAARA_IMAGES = [
 
   {
     src: "assets/daara/kutub.jpg",
-    alt:     { fr: "La Daara : le pole maitre",     bm: "Daara : kutubul wakti" },
+    alt:     { fr: "La Daara : le pole maitre",     bm: "Daara : SAMBA NDJOBDY DIALLO kutubul wakti" },
     legende: { fr: "Le maitre spirituel",             bm: "Kutubul wakti" }
   },
   {
@@ -70,7 +70,7 @@ const TEXTS = {
     basmala: "بسم الله الرحمن الرحيم",
     heroTitle: "Allah Don",
     heroSubtitle:
-      "Une voie initiatique fondée sur l'islam et la tradition soufie. " +
+      "Une voie initiatique fondée sur l'islam et le cheminement vers la Vérité. " +
       "Ici, on frappe humblement à la porte avant d'entrer.",
     heroButton: "Franchir le seuil",
 
@@ -94,6 +94,7 @@ const TEXTS = {
       pathLabel: "Ton parcours spirituel actuel",
       pathOptions: [
         "Musulman pratiquant",
+        "Chretien ou autre religion, en quête de l'islam",
         "Musulman en quête",
         "Déjà dans une voie soufie",
         "Autre"
@@ -178,6 +179,7 @@ const TEXTS = {
     basmala: "بسم الله الرحمن الرحيم",
     heroTitle: "Allah Don",
     heroSubtitle:
+    "Ka Allah mɛn Ka Allah ye Ka Allah Don. "+
       "Sila min sinsinnen bɛ Silamɛya ni Sufiya laadaw kan. " +
       "Yan, mɔgɔ bɛ da gosi ni majigilenya ye sani a ka don.",
     heroButton: "Da tɛmɛ",
