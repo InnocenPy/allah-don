@@ -7,7 +7,7 @@
 /* 1. NUMÉRO WHATSAPP
    Format international, sans « + », sans espaces ni tirets.
    Exemple Mali : "223" + numéro à 8 chiffres  →  "22370123456" */
-const WHATSAPP_NUMBER = "22396855282";
+const WHATSAPP_NUMBER = "22395604923";
 
 /* 2. LANGUE
    LANG                  : langue d'ouverture du site ("fr" ou "bm").
