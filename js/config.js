@@ -32,7 +32,7 @@ const DAARA_IMAGES = [
   },
 
   {
-    src: "assets/daara/kutub.jpg",
+    src: "assets/daara/kutubula2.jpg",
     alt:     { fr: "La Daara : le pole maitre",     bm: "Daara : SAMBA NDJOBDY DIALLO kutubul wakti" },
     legende: { fr: "Le maitre spirituel",             bm: "Kutubul wakti" }
   },
@@ -52,7 +52,7 @@ const DAARA_IMAGES = [
     legende: { fr: "un héritage spirituel",       bm: "Al barika Samba NDJOBDY DIALLO" }
   },
   {
-    src: "assets/daara/daara-3.svg",
+    src: "assets/daara/diakite.jpg",
     alt:     { fr: "La Daara : étude et transmission", bm: "Daara : kalan ni dɔnniya di" },
     legende: { fr: "L'étude et la transmission",       bm: "Kalan ni dɔnniya di" }
   }
@@ -81,7 +81,7 @@ const VIDEOS = [
            (cohérent avec la mention de confidentialité du site). Recommandé.
    true  = affiche l'image de couverture YouTube, mais YouTube reçoit alors l'adresse
            IP de chaque visiteur dès l'ouverture de la page. */
-const SHOW_VIDEO_THUMBNAILS = false;
+const SHOW_VIDEO_THUMBNAILS = true;
 
 /* 4. TEXTES DU SITE
    Chaque langue est un objet complet. Pour ajouter une langue,

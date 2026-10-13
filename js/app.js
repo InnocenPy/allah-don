@@ -106,6 +106,9 @@
     setText("reopenBtn", T.thanks.reopen);
 
     setText("privacy", T.privacy);
+    setText("videosTitle", T.videos.title);
+    setText("videosIntro", T.videos.intro);
+    setText("videosNote", T.videos.source);
 
     /* Barre de progression : 3 étapes */
     var list = $("progressList");
@@ -415,9 +418,7 @@
   function stopCarousel() { if (carTimer) { clearInterval(carTimer); carTimer = null; } }
   function restartCarousel() { if (currentStep === 0) startCarousel(); }
 
-
-
- /* ---------- Vidéos ---------- */
+  /* ---------- Vidéos ---------- */
   var videoItems = [];   // { v, frame, poster, labelEl, titleEl, textEl, linkEl, thumb }
 
   function validVideos() {
@@ -531,6 +532,7 @@
     T = TEXTS[l];
     fillTexts();              // textes, boutons, progression (les réponses saisies restent en place)
     refreshCarouselTexts();
+    refreshVideoTexts();
     clearErrors();            // les messages d'erreur affichés étaient dans l'ancienne langue
     updateCount();
     if (currentStep === 4) buildRecap();
