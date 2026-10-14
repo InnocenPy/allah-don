@@ -26,20 +26,19 @@ const WHATSAPP_MESSAGE_LANG = "fr";
    Ajoutez ou supprimez des lignes librement. */
 const DAARA_IMAGES = [
   {
-    src: "assets/daara/porte-daara.png",
+    src: "assets/daara/porte-daara.jpg",
     alt:     { fr: "La Daara : lieu d'enseignement", bm: "Daara : kalan yɔrɔ" },
     legende: { fr: "La Daara",                       bm: "Daara" }
   },
-
   {
     src: "assets/daara/kutubula2.jpg",
-    alt:     { fr: "La Daara : le pole maitre",     bm: "Daara : SAMBA NDJOBDY DIALLO kutubul wakti" },
-    legende: { fr: "Le maitre spirituel",             bm: "Kutubul wakti" }
+    alt:     { fr: "La Daara : le pôle, maître spirituel SAMBA N'DJOBDY DIALLO", bm: "Daara : SAMBA N'DJOBDY DIALLO kutubul wakti" },
+    legende: { fr: "Le maître spirituel",            bm: "Kutubul wakti" }
   },
   {
     src: "assets/daara/begueti.jpg",
-    alt:     { fr: "La Daara : disciple",     bm: "Daara : kalan denw" },
-    legende: { fr: "Les disciples",             bm: "Kalan denw" }
+    alt:     { fr: "La Daara : les disciples",       bm: "Daara : kalan denw" },
+    legende: { fr: "Les disciples",                  bm: "Kalan denw" }
   },
   {
     src: "assets/daara/cercle.jpg",
@@ -47,9 +46,9 @@ const DAARA_IMAGES = [
     legende: { fr: "Le cercle du dhikr",             bm: "Zikiri lamini" }
   },
   {
-    src: "assets/daara/kutubu2.png",
-    alt:     { fr: "La Daara : un héritage spirituel", bm: "Daara : A barika Samba NDJOBDY DIALLO" },
-    legende: { fr: "un héritage spirituel",       bm: "Al barika Samba NDJOBDY DIALLO" }
+    src: "assets/daara/kutubu2.jpg",
+    alt:     { fr: "La Daara : un héritage spirituel", bm: "Daara : Al barika SAMBA N'DJOBDY DIALLO" },
+    legende: { fr: "Un héritage spirituel",            bm: "Al barika SAMBA N'DJOBDY DIALLO" }
   },
   {
     src: "assets/daara/diakite.jpg",
@@ -71,7 +70,7 @@ const CAROUSEL_DELAY = 5000;
 const VIDEOS = [
   {
     id: "8U6TOojVpHM",
-    titre: { fr: "Kutub Samba Ndjodi DIALLO", bm: "Kutub Samba Ndjodi DIALLO" },
+    titre: { fr: "Kutub SAMBA N'DJOBDY DIALLO", bm: "Kutub SAMBA N'DJOBDY DIALLO" },
     texte: { fr: "", bm: "" }
   }
 ];
@@ -81,7 +80,7 @@ const VIDEOS = [
            (cohérent avec la mention de confidentialité du site). Recommandé.
    true  = affiche l'image de couverture YouTube, mais YouTube reçoit alors l'adresse
            IP de chaque visiteur dès l'ouverture de la page. */
-const SHOW_VIDEO_THUMBNAILS = true;
+const SHOW_VIDEO_THUMBNAILS = false;
 
 /* 4. TEXTES DU SITE
    Chaque langue est un objet complet. Pour ajouter une langue,
@@ -121,7 +120,7 @@ const TEXTS = {
       pathLabel: "Ton parcours spirituel actuel",
       pathOptions: [
         "Musulman pratiquant",
-        "Chretien ou autre religion, en quête de l'islam",
+        "Chrétien ou autre religion, en quête de l'islam",
         "Musulman en quête",
         "Déjà dans une voie soufie",
         "Autre"
@@ -154,7 +153,7 @@ const TEXTS = {
       name: "Merci d'écrire ton nom et ton prénom.",
       country: "Merci d'indiquer ton pays.",
       city: "Merci d'indiquer ta ville.",
-      quest: "Prends le temps d'écrire au moins 20 caractères sur ta quête.",
+      quest: "Prends le temps d'écrire au moins {min} caractères sur ta quête.",
       sincerity: "Merci de cocher la case pour continuer.",
       noNumber: "Le numéro WhatsApp n'est pas encore configuré (voir js/config.js)."
     },
@@ -170,9 +169,18 @@ const TEXTS = {
     },
 
     privacy:
-      "Confidentialité : ce site ne stocke aucune donnée et n'en envoie à aucun " +
-      "serveur. Tes réponses restent dans ton navigateur jusqu'à ce que tu " +
-      "envoies toi-même le message sur WhatsApp.",
+      "Confidentialité : ce site ne stocke aucune donnée et n'envoie tes réponses à " +
+      "aucun serveur. Elles restent dans ton navigateur jusqu'à ce que tu " +
+      "envoies toi-même le message sur WhatsApp. Les vidéos ne se chargent depuis " +
+      "YouTube que si tu appuies sur lecture.",
+
+    videos: {
+      title: "Paroles et enseignements",
+      intro: "Écoute les enseignements de la voie.",
+      source: "Les vidéos sont hébergées sur YouTube.",
+      openOn: "Voir sur YouTube",
+      play: "Lire la vidéo : {title}"
+    },
 
     ui: {
       skipLink: "Aller au contenu",
@@ -229,8 +237,10 @@ const TEXTS = {
       cityLabel: "Dugu",
       cityPlaceholder: "I ka dugu",
       pathLabel: "I ka diine sila sisan",
+      /* Même ordre et même nombre de choix que la liste française */
       pathOptions: [
         "Silamɛ min bɛ batoli kɛ",
+        "Kerecɛn walima diine wɛrɛ, min bɛ Silamɛya ɲini",   /* À faire relire */
         "Silamɛ min bɛ sila ɲini",
         "Ne bɛ Sufiya sila dɔ la kaban",
         "Wɛrɛ"
@@ -263,7 +273,7 @@ const TEXTS = {
       name: "I tɔgɔ ni i jamu sɛbɛn, i ni ce.",
       country: "I ka jamana fɔ, i ni ce.",
       city: "I ka dugu fɔ, i ni ce.",
-      quest: "I ka ɲinini sɛbɛn ka bon dɔɔnin (ka tɛmɛ sɛbɛnni 20 kan).",
+      quest: "I ka ɲinini sɛbɛn ka bon dɔɔnin (ka tɛmɛ sɛbɛnni {min} kan).",
       sincerity: "I ka sɔnni taamasyɛn in kɛ ka taa ɲɛ, i ni ce.",
       noNumber: "WhatsApp nimɔrɔ ma sigi fɔlɔ (js/config.js lajɛ)."
     },
@@ -279,7 +289,17 @@ const TEXTS = {
 
     privacy:
       "Dogoyalɔn : nin sayiti tɛ kunnafoni si mara, a tɛ si ci serveri si ma. " +
-      "I ka jaabiw bɛ to i ka navigatɛri kɔnɔ fo i yɛrɛ ka message ci WhatsApp kan.",
+      "I ka jaabiw bɛ to i ka navigatɛri kɔnɔ fo i yɛrɛ ka message ci WhatsApp kan. " +
+      "Videyow tɛ bɔ YouTube kan ni i ma lajɛli butɔni digi.",
+
+    /* À faire relire */
+    videos: {
+      title: "Kalanw ni kumaw",
+      intro: "Sila in ka kalanw lamɛn.",
+      source: "Videyow bɛ YouTube kan.",
+      openOn: "A lajɛ YouTube kan",
+      play: "Videyo daminɛ : {title}"
+    },
 
     ui: {
       skipLink: "Taa kɔnɔ ma",

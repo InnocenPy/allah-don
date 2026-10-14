@@ -18,7 +18,7 @@ les réponses restent dans le navigateur jusqu'à l'envoi du message WhatsApp.
 
 ## 1. Changer le numéro WhatsApp
 
-Ouvrez `js/config.js` et modifiez la première ligne :
+Ouvrez `js/config.js` et modifiez la constante `WHATSAPP_NUMBER` (section 1) :
 
 ```js
 const WHATSAPP_NUMBER = "22370123456";
@@ -36,15 +36,29 @@ Mali : `223` suivi des 8 chiffres du numéro.
 
 ```js
 const DAARA_IMAGES = [
-  { src: "assets/daara/photo1.jpg", alt: "Description de la photo", legende: "Texte sous l'image" },
-  { src: "assets/daara/photo2.jpg", alt: "Description de la photo", legende: "" }
+  {
+    src: "assets/daara/photo1.jpg",
+    alt:     { fr: "Description de la photo", bm: "…" },
+    legende: { fr: "Texte sous l'image",      bm: "…" }
+  }
 ];
 ```
 
-Les trois images fournies (`daara-1.svg` à `daara-3.svg`) sont des **images provisoires** :
-remplacez-les par vos photos. Le défilement est automatique, se met en pause au
-survol, et se commande aussi avec les flèches, les points ou un glissement du doigt.
+Le défilement est automatique, se met en pause au survol, et se commande aussi
+avec les flèches, les points ou un glissement du doigt. Une image introuvable
+est simplement retirée du carrousel.
 La durée d'affichage se règle avec `CAROUSEL_DELAY` (en millisecondes).
+
+## 2 bis. Vidéos YouTube
+
+La liste `VIDEOS` de `js/config.js` affiche une section vidéos en bas de la page
+d'accueil. Pour chaque vidéo : `id` (les 11 caractères après `v=` dans le lien
+YouTube), `titre` et `texte` en français et en bamanankan. Une liste vide (`[]`)
+masque la section.
+
+`SHOW_VIDEO_THUMBNAILS = false` (recommandé) : aucune connexion à YouTube tant
+que le visiteur n'appuie pas sur lecture. Avec `true`, la miniature YouTube
+s'affiche, mais YouTube reçoit l'adresse IP de chaque visiteur.
 
 ## 3. Langues : français et bamanankan
 
@@ -70,9 +84,13 @@ directement dans l'objet `bm`, sans toucher au reste du code.
 ## 4. Modifier les textes
 
 Tous les textes sont dans l'objet `TEXTS` de `js/config.js`, un bloc par langue
-(titres, questions, messages d'erreur, remerciement, confidentialité, modèle du
-message WhatsApp). Les légendes des images de la Daara existent aussi dans les
-deux langues (`legende: { fr: "…", bm: "…" }`).
+(titres, questions, messages d'erreur, remerciement, confidentialité, vidéos,
+modèle du message WhatsApp). Les légendes des images de la Daara existent aussi
+dans les deux langues (`legende: { fr: "…", bm: "…" }`).
+
+**Attention :** les listes `pathOptions` (parcours spirituel) doivent avoir le
+**même nombre de choix, dans le même ordre**, dans chaque langue. Le choix est
+mémorisé par sa position : un décalage fausserait le message WhatsApp.
 
 Pour ajouter une autre langue (l'arabe, par exemple) : dupliquez un bloc,
 traduisez les valeurs, puis ajoutez un bouton `<button data-lang="ar">` dans
@@ -102,9 +120,13 @@ assets/daara/       photos du carrousel
 
 ## Confidentialité
 
-Le site ne stocke rien (ni cookies, ni stockage local) et n'envoie aucune donnée
-à un serveur. Les informations transitent uniquement par le message que la
-personne envoie elle-même sur WhatsApp.
+Le site ne stocke rien (ni cookies, ni stockage local) et n'envoie les réponses
+à aucun serveur. Elles transitent uniquement par le message que la personne
+envoie elle-même sur WhatsApp.
+
+Connexions externes : les polices Google Fonts au chargement, et YouTube
+uniquement quand le visiteur lance une vidéo (ou dès l'ouverture si
+`SHOW_VIDEO_THUMBNAILS = true`).
 
 ## Remarque sur les polices
 

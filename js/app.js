@@ -223,7 +223,7 @@
       else setError("fCity", "errCity", "");
     }
     if (step === 3) {
-      if (answers.quest.length < T.q3.minChars) { setError("fQuest", "errQuest", T.errors.quest); bad("fQuest"); }
+      if (answers.quest.length < T.q3.minChars) { setError("fQuest", "errQuest", fmt(T.errors.quest, { min: T.q3.minChars })); bad("fQuest"); }
       else setError("fQuest", "errQuest", "");
     }
     if (step === 4) {
@@ -331,13 +331,12 @@
       var li = document.createElement("li");
       li.className = "carousel__slide";
       li.setAttribute("aria-hidden", "true");
+      li.dataset.idx = String(i);
       var im = document.createElement("img");
       im.src = img.src;
       im.alt = tr(img.alt);
       im.decoding = "async";
       if (i > 0) im.loading = "lazy";
-      /* Si une image est introuvable, on retire simplement la diapositive */
-      im.addEventListener("error", function () { li.style.display = "none"; });
       li.appendChild(im);
       track.appendChild(li);
 
@@ -345,18 +344,15 @@
       d.type = "button";
       d.className = "carousel__dot";
       d.setAttribute("role", "tab");
-      d.setAttribute("aria-label", fmt(T.ui.carDot, { i: i + 1, n: DAARA_IMAGES.length }));
-      d.addEventListener("click", function () { goTo(i); restartCarousel(); });
+      d.addEventListener("click", function () { goTo(carDots.indexOf(d)); restartCarousel(); });
       dots.appendChild(d);
+
+      /* Si une image est introuvable, on retire la diapositive et son point du cycle */
+      im.addEventListener("error", function () { removeSlide(li, d); });
     });
 
     carSlides = Array.prototype.slice.call(track.children);
     carDots = Array.prototype.slice.call(dots.children);
-
-    var multiple = DAARA_IMAGES.length > 1;
-    $("carPrev").hidden = !multiple;
-    $("carNext").hidden = !multiple;
-    dots.hidden = !multiple;
 
     $("carPrev").addEventListener("click", function () { goTo(carIndex - 1); restartCarousel(); });
     $("carNext").addEventListener("click", function () { goTo(carIndex + 1); restartCarousel(); });
@@ -377,7 +373,36 @@
       if (Math.abs(dx) > 40) { goTo(carIndex + (dx < 0 ? 1 : -1)); restartCarousel(); }
     }, { passive: true });
 
+    updateCarouselControls();
     goTo(0);
+  }
+
+  /* Image de config.js correspondant à une diapositive */
+  function slideData(s) { return DAARA_IMAGES[parseInt(s.dataset.idx, 10)]; }
+
+  /* Flèches et points masqués s'il reste moins de 2 images */
+  function updateCarouselControls() {
+    var multiple = carSlides.length > 1;
+    $("carPrev").hidden = !multiple;
+    $("carNext").hidden = !multiple;
+    $("carDots").hidden = !multiple;
+    $("carousel").hidden = carSlides.length === 0;
+    carDots.forEach(function (d, k) {
+      d.setAttribute("aria-label", fmt(T.ui.carDot, { i: k + 1, n: carDots.length }));
+    });
+  }
+
+  function removeSlide(li, dot) {
+    var k = carSlides.indexOf(li);
+    if (k === -1) return;
+    li.remove();
+    dot.remove();
+    carSlides.splice(k, 1);
+    carDots.splice(k, 1);
+    if (k < carIndex) carIndex--;
+    updateCarouselControls();
+    if (carSlides.length) goTo(carIndex);
+    if (carSlides.length < 2) stopCarousel();
   }
 
   function goTo(i) {
@@ -390,20 +415,18 @@
       s.setAttribute("aria-hidden", on ? "false" : "true");
     });
     carDots.forEach(function (d, k) { d.setAttribute("aria-selected", k === carIndex ? "true" : "false"); });
-    $("carCaption").textContent = tr(DAARA_IMAGES[carIndex].legende);
+    $("carCaption").textContent = tr(slideData(carSlides[carIndex]).legende);
   }
 
   /* Met à jour légende, descriptions et libellés quand la langue change */
   function refreshCarouselTexts() {
     if (!carSlides.length) return;
-    carSlides.forEach(function (s, k) {
+    carSlides.forEach(function (s) {
       var im = s.querySelector("img");
-      if (im) im.alt = tr(DAARA_IMAGES[k].alt);
+      if (im) im.alt = tr(slideData(s).alt);
     });
-    carDots.forEach(function (d, k) {
-      d.setAttribute("aria-label", fmt(T.ui.carDot, { i: k + 1, n: DAARA_IMAGES.length }));
-    });
-    $("carCaption").textContent = tr(DAARA_IMAGES[carIndex].legende);
+    updateCarouselControls();
+    $("carCaption").textContent = tr(slideData(carSlides[carIndex]).legende);
   }
 
   function startCarousel() {
