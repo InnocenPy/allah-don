@@ -31,7 +31,7 @@ const DAARA_IMAGES = [
     legende: { fr: "La Daara", bm: "Daara" }
   },
   {
-    src: "assets/daara/kutubula2.jpg",
+    src: "assets/daara/kutubula.jpg",
     alt: { fr: "La Daara : le pôle, maître spirituel SAMBA N'DJOBDY DIALLO", bm: "Daara : SAMBA N'DJOBDY DIALLO kutubul wakti" },
     legende: { fr: "Le maître spirituel", bm: "Kutubul wakti" }
   },
