@@ -27,33 +27,38 @@ const WHATSAPP_MESSAGE_LANG = "fr";
 const DAARA_IMAGES = [
   {
     src: "assets/daara/porte-daara.jpg",
-    alt:     { fr: "La Daara : lieu d'enseignement", bm: "Daara : kalan yɔrɔ" },
-    legende: { fr: "La Daara",                       bm: "Daara" }
+    alt: { fr: "La Daara : lieu d'enseignement", bm: "Daara : kalan yɔrɔ" },
+    legende: { fr: "La Daara", bm: "Daara" }
   },
   {
     src: "assets/daara/kutubula2.jpg",
-    alt:     { fr: "La Daara : le pôle, maître spirituel SAMBA N'DJOBDY DIALLO", bm: "Daara : SAMBA N'DJOBDY DIALLO kutubul wakti" },
-    legende: { fr: "Le maître spirituel",            bm: "Kutubul wakti" }
+    alt: { fr: "La Daara : le pôle, maître spirituel SAMBA N'DJOBDY DIALLO", bm: "Daara : SAMBA N'DJOBDY DIALLO kutubul wakti" },
+    legende: { fr: "Le maître spirituel", bm: "Kutubul wakti" }
   },
   {
     src: "assets/daara/begueti.jpg",
-    alt:     { fr: "La Daara : les disciples",       bm: "Daara : kalan denw" },
-    legende: { fr: "Les disciples",                  bm: "Kalan denw" }
+    alt: { fr: "La Daara : les disciples", bm: "Daara : kalan denw" },
+    legende: { fr: "Les disciples", bm: "Kalan denw" }
   },
   {
     src: "assets/daara/cercle.jpg",
-    alt:     { fr: "La Daara : cercle de dhikr",     bm: "Daara : zikiri lamini" },
-    legende: { fr: "Le cercle du dhikr",             bm: "Zikiri lamini" }
+    alt: { fr: "La Daara : cercle de dhikr", bm: "Daara : zikiri lamini" },
+    legende: { fr: "Le cercle du dhikr", bm: "Zikiri lamini" }
   },
   {
     src: "assets/daara/kutubu2.jpg",
-    alt:     { fr: "La Daara : un héritage spirituel", bm: "Daara : Al barika SAMBA N'DJOBDY DIALLO" },
-    legende: { fr: "Un héritage spirituel",            bm: "Al barika SAMBA N'DJOBDY DIALLO" }
+    alt: { fr: "La Daara : un héritage spirituel", bm: "Daara : Al barika SAMBA N'DJOBDY DIALLO" },
+    legende: { fr: "Un héritage spirituel", bm: "Al barika SAMBA N'DJOBDY DIALLO" }
   },
   {
     src: "assets/daara/diakite.jpg",
-    alt:     { fr: "La Daara : étude et transmission", bm: "Daara : kalan ni dɔnniya di" },
-    legende: { fr: "L'étude et la transmission",       bm: "Kalan ni dɔnniya di" }
+    alt: { fr: "La Daara : étude et transmission", bm: "Daara : kalan ni dɔnniya di" },
+    legende: { fr: "L'étude et la transmission", bm: "Kalan ni dɔnniya di" }
+  },
+  {
+    src: "assets/daara/maouloud.jpg",
+    alt: { fr: "La Daara : célébration du Maouloud du Prophète (PSL)", bm: "Daara : Mawulidi kɛtɔ (Kira ka danyeli don)" },
+    legende: { fr: "Maouloud du Prophète (PSL)", bm: "Mawulidi (Kira ka danyeli don)" }
   }
 ];
 
@@ -214,7 +219,7 @@ const TEXTS = {
     basmala: "بسم الله الرحمن الرحيم",
     heroTitle: "Allah Don",
     heroSubtitle:
-    "Ka Allah mɛn Ka Allah ye Ka Allah Don. "+
+      "Ka Allah mɛn Ka Allah ye Ka Allah Don. " +
       "Sila min sinsinnen bɛ Silamɛya ni Sufiya laadaw kan. " +
       "Yan, mɔgɔ bɛ da gosi ni majigilenya ye sani a ka don.",
     heroButton: "Da tɛmɛ",
