@@ -219,8 +219,8 @@ const TEXTS = {
     basmala: "بسم الله الرحمن الرحيم",
     heroTitle: "Allah Don",
     heroSubtitle:
-      "Ka Allah mɛn Ka Allah ye Ka Allah Don. " +
-      "Sila min sinsinnen bɛ Silamɛya ni Sufiya laadaw kan. " +
+      "Ka Allah mɛn, Ka Allah ye, Ka Allah Don. " +
+      "Sira min sinsinnen bɛ Allah doniya Haqiqa kan. " +
       "Yan, mɔgɔ bɛ da gosi ni majigilenya ye sani a ka don.",
     heroButton: "Da tɛmɛ",
 
