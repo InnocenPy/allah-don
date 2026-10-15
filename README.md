@@ -60,6 +60,18 @@ masque la section.
 que le visiteur n'appuie pas sur lecture. Avec `true`, la miniature YouTube
 s'affiche, mais YouTube reçoit l'adresse IP de chaque visiteur.
 
+## 2 ter. Poèmes des grands maîtres spirituels
+
+La liste `POEMS` de `js/config.js` permet d'afficher des poèmes et méditations
+des maîtres de la voie sur la page d'accueil. Pour chaque poème :
+- `titre` : en français et en bamanankan
+- `auteur` : nom du maître (ex. `Kutub SAMBA N'DJOBDY DIALLO`)
+- `arabe` : invocation ou verset arabe (laissez `""` si aucun)
+- `vers` : strophes ou vers du poème sous forme de liste en `fr` et `bm`
+- `note` : commentaire ou source (laissez `""` si aucun)
+
+Une liste vide (`[]`) masque automatiquement la section poèmes.
+
 ## 3. Langues : français et bamanankan
 
 Un sélecteur **FR / BM** est affiché en haut de chaque page. Changer de langue

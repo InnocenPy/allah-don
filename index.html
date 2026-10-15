@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Allah Don | Portail</title>
-  <meta name="description" content="Allah Don : un groupe spirituel initiatique fondé sur l'islam et la voie soufie. Franchis le seuil et demande le wird du cheikh.">
+  <meta name="description"
+    content="Allah Don : un groupe spirituel initiatique fondé sur l'islam et la voie soufie. Franchis le seuil et demande le wird du cheikh.">
   <meta name="theme-color" content="#08161f">
   <link rel="icon" href="assets/pattern.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@400;500&family=Noto+Sans:wght@400;500&family=Noto+Serif:wght@500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@400;500&family=Noto+Sans:wght@400;500&family=Noto+Serif:wght@500;600;700&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
   <a class="skip-link" id="skipLink" href="#contenu">Aller au contenu</a>
 
@@ -21,11 +26,11 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="star8" viewBox="0 0 100 100">
       <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
-        <rect x="22" y="22" width="56" height="56"/>
-        <rect x="22" y="22" width="56" height="56" transform="rotate(45 50 50)"/>
-        <circle cx="50" cy="50" r="13" stroke-width="1.2"/>
+        <rect x="22" y="22" width="56" height="56" />
+        <rect x="22" y="22" width="56" height="56" transform="rotate(45 50 50)" />
+        <circle cx="50" cy="50" r="13" stroke-width="1.2" />
       </g>
-      <circle cx="50" cy="50" r="4" fill="currentColor"/>
+      <circle cx="50" cy="50" r="4" fill="currentColor" />
     </symbol>
   </svg>
 
@@ -63,11 +68,14 @@
       <p class="hero-sub" id="heroSub"></p>
 
       <!-- Carrousel de la Daara -->
-      <div class="carousel" id="carousel" role="region" aria-roledescription="carrousel" aria-label="Images de la Daara">
+      <div class="carousel" id="carousel" role="region" aria-roledescription="carrousel"
+        aria-label="Images de la Daara">
         <div class="carousel__frame">
           <ul class="carousel__track" id="carouselTrack"></ul>
-          <button class="carousel__btn carousel__btn--prev" id="carPrev" type="button" aria-label="Image précédente">‹</button>
-          <button class="carousel__btn carousel__btn--next" id="carNext" type="button" aria-label="Image suivante">›</button>
+          <button class="carousel__btn carousel__btn--prev" id="carPrev" type="button"
+            aria-label="Image précédente">‹</button>
+          <button class="carousel__btn carousel__btn--next" id="carNext" type="button"
+            aria-label="Image suivante">›</button>
         </div>
         <p class="carousel__caption" id="carCaption" aria-live="polite"></p>
         <div class="carousel__dots" id="carDots" role="tablist" aria-label="Choisir une image"></div>
@@ -178,9 +186,30 @@
       <button class="btn btn--primary" id="nextBtn" type="button"></button>
     </div>
 
+    <!-- Poèmes des grands maîtres (affichés sur la page d'accueil uniquement) -->
+    <section class="poems" id="poems" aria-labelledby="poemsTitle" hidden>
+      <svg class="poems__star" viewBox="0 0 100 100" aria-hidden="true">
+        <use href="#star8"></use>
+      </svg>
+      <h2 class="poems__title" id="poemsTitle"></h2>
+      <p class="poems__intro" id="poemsIntro"></p>
+
+      <div class="poems__nav" id="poemsNav">
+        <button class="poems__btn" id="poemPrev" type="button" aria-label="Poème précédent">‹</button>
+        <span class="poems__counter" id="poemCount" aria-live="polite">1 / 20</span>
+        <button class="poems__btn" id="poemNext" type="button" aria-label="Poème suivant">›</button>
+        <button class="poems__btn poems__btn--rand" id="poemRand" type="button" aria-label="Découvrir un autre poème"
+          title="Découvrir un autre poème">✦</button>
+      </div>
+
+      <div class="poems__list" id="poemsList"></div>
+    </section>
+
     <!-- Vidéos (affichées sur la page d'accueil uniquement) -->
     <section class="videos" id="videos" aria-labelledby="videosTitle" hidden>
-      <svg class="videos__star" viewBox="0 0 100 100" aria-hidden="true"><use href="#star8"></use></svg>
+      <svg class="videos__star" viewBox="0 0 100 100" aria-hidden="true">
+        <use href="#star8"></use>
+      </svg>
       <h2 class="videos__title" id="videosTitle"></h2>
       <p class="videos__intro" id="videosIntro"></p>
       <div class="videos__list" id="videosList"></div>
@@ -195,4 +224,5 @@
   <script src="js/config.js"></script>
   <script src="js/app.js"></script>
 </body>
+
 </html>

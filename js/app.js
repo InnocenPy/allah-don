@@ -106,6 +106,8 @@
     setText("reopenBtn", T.thanks.reopen);
 
     setText("privacy", T.privacy);
+    setText("poemsTitle", T.poems.title);
+    setText("poemsIntro", T.poems.intro);
     setText("videosTitle", T.videos.title);
     setText("videosIntro", T.videos.intro);
     setText("videosNote", T.videos.source);
@@ -166,7 +168,8 @@
     /* Le carrousel ne tourne que sur la page d'accueil */
     if (n === 0) startCarousel(); else stopCarousel();
 
-    /* Les vidéos ne s'affichent que sur la page d'accueil, et s'arrêtent quand on la quitte */
+    /* Les poèmes et vidéos ne s'affichent que sur la page d'accueil */
+    $("poems").hidden = !(n === 0 && validPoems().length > 0);
     $("videos").hidden = !(n === 0 && validVideos().length > 0);
     if (n !== 0) stopVideos();
 
@@ -542,6 +545,188 @@
     carHover = false;
   }
 
+  /* ---------- Poèmes des grands maîtres ---------- */
+  var poemItems = [];
+  var poemCards = [];
+  var poemIndex = 0;
+
+  function validPoems() {
+    return (typeof POEMS !== "undefined" && Array.isArray(POEMS) ? POEMS : []).filter(function (p) {
+      return p && (p.titre || p.vers || p.arabe);
+    });
+  }
+
+  function showPoem(i) {
+    var n = poemCards.length;
+    if (!n) return;
+    poemIndex = (i + n) % n;
+
+    poemCards.forEach(function (card, k) {
+      var on = k === poemIndex;
+      card.classList.toggle("is-active", on);
+      card.setAttribute("aria-hidden", on ? "false" : "true");
+    });
+
+    var countEl = $("poemCount");
+    if (countEl) {
+      countEl.textContent = fmt(T.ui.poemCount, { i: poemIndex + 1, n: n });
+    }
+  }
+
+  function nextRandomPoem() {
+    var n = poemCards.length;
+    if (n <= 1) return;
+    var next;
+    do {
+      next = Math.floor(Math.random() * n);
+    } while (next === poemIndex);
+    showPoem(next);
+  }
+
+  function buildPoems() {
+    var list = $("poemsList");
+    if (!list) return;
+    list.innerHTML = "";
+    poemItems = [];
+    poemCards = [];
+
+    var listPoems = validPoems();
+    listPoems.forEach(function (p, i) {
+      var card = document.createElement("article");
+      card.className = "poem-card";
+      card.setAttribute("aria-hidden", i === 0 ? "false" : "true");
+
+      var header = document.createElement("header");
+      header.className = "poem-card__header";
+
+      var titleEl = document.createElement("h3");
+      titleEl.className = "poem-card__title";
+
+      var authorEl = document.createElement("p");
+      authorEl.className = "poem-card__author";
+
+      header.appendChild(titleEl);
+      header.appendChild(authorEl);
+      card.appendChild(header);
+
+      var arabEl = document.createElement("p");
+      arabEl.className = "poem-card__arab";
+      arabEl.setAttribute("lang", "ar");
+      arabEl.setAttribute("dir", "rtl");
+      card.appendChild(arabEl);
+
+      var versesEl = document.createElement("div");
+      versesEl.className = "poem-card__verses";
+      card.appendChild(versesEl);
+
+      var noteEl = document.createElement("p");
+      noteEl.className = "poem-card__note";
+      card.appendChild(noteEl);
+
+      list.appendChild(card);
+      poemCards.push(card);
+
+      poemItems.push({
+        p: p,
+        titleEl: titleEl,
+        authorEl: authorEl,
+        arabEl: arabEl,
+        versesEl: versesEl,
+        noteEl: noteEl
+      });
+    });
+
+    var nav = $("poemsNav");
+    if (nav) nav.hidden = listPoems.length <= 1;
+
+    var prevBtn = $("poemPrev");
+    var nextBtn = $("poemNext");
+    var randBtn = $("poemRand");
+
+    if (prevBtn && !prevBtn._bound) {
+      prevBtn.addEventListener("click", function () { showPoem(poemIndex - 1); });
+      prevBtn._bound = true;
+    }
+    if (nextBtn && !nextBtn._bound) {
+      nextBtn.addEventListener("click", function () { showPoem(poemIndex + 1); });
+      nextBtn._bound = true;
+    }
+    if (randBtn && !randBtn._bound) {
+      randBtn.addEventListener("click", nextRandomPoem);
+      randBtn._bound = true;
+    }
+
+    /* Swipe sur mobile pour tourner les poèmes */
+    var touchStartX = null;
+    list.addEventListener("touchstart", function (e) {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    list.addEventListener("touchend", function (e) {
+      if (touchStartX === null) return;
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(dx) > 40) {
+        showPoem(poemIndex + (dx < 0 ? 1 : -1));
+      }
+    }, { passive: true });
+
+    refreshPoemTexts();
+    showPoem(0);
+  }
+
+  function refreshPoemTexts() {
+    poemItems.forEach(function (it) {
+      var p = it.p;
+      var title = tr(p.titre);
+      var author = p.auteur || "";
+      var arab = p.arabe || "";
+      var note = tr(p.note);
+
+      it.titleEl.textContent = title;
+      it.titleEl.hidden = !title;
+
+      it.authorEl.textContent = author;
+      it.authorEl.hidden = !author;
+
+      it.arabEl.textContent = arab;
+      it.arabEl.hidden = !arab;
+
+      var rawVerses = (p.vers && typeof p.vers === "object") ? (p.vers[CUR] || p.vers.fr || []) : p.vers;
+      it.versesEl.innerHTML = "";
+      if (Array.isArray(rawVerses)) {
+        rawVerses.forEach(function (line) {
+          var pEl = document.createElement("p");
+          pEl.className = "poem-card__line";
+          pEl.textContent = line;
+          it.versesEl.appendChild(pEl);
+        });
+      } else if (rawVerses) {
+        var singleEl = document.createElement("p");
+        singleEl.className = "poem-card__line";
+        singleEl.textContent = String(rawVerses);
+        it.versesEl.appendChild(singleEl);
+      }
+
+      it.noteEl.textContent = note;
+      it.noteEl.hidden = !note;
+    });
+
+    var prevBtn = $("poemPrev");
+    var nextBtn = $("poemNext");
+    var randBtn = $("poemRand");
+    if (prevBtn) prevBtn.setAttribute("aria-label", T.ui.poemPrev);
+    if (nextBtn) nextBtn.setAttribute("aria-label", T.ui.poemNext);
+    if (randBtn) {
+      randBtn.setAttribute("aria-label", T.ui.poemRand);
+      randBtn.setAttribute("title", T.ui.poemRand);
+    }
+
+    var countEl = $("poemCount");
+    if (countEl && poemCards.length) {
+      countEl.textContent = fmt(T.ui.poemCount, { i: poemIndex + 1, n: poemCards.length });
+    }
+  }
+
   /* ---------- Changement de langue ---------- */
   function clearErrors() {
     ["errName", "errCountry", "errCity", "errQuest", "errSincere"].forEach(function (id) { $(id).textContent = ""; });
@@ -556,6 +741,7 @@
     fillTexts();              // textes, boutons, progression (les réponses saisies restent en place)
     refreshCarouselTexts();
     refreshVideoTexts();
+    refreshPoemTexts();
     clearErrors();            // les messages d'erreur affichés étaient dans l'ancienne langue
     updateCount();
     if (currentStep === 4) buildRecap();
@@ -623,6 +809,7 @@
   function init() {
     fillTexts();
     buildCarousel();
+    buildPoems();
     buildVideos();
     bindEvents();
     updateCount();

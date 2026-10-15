@@ -640,6 +640,184 @@ textarea:focus {
   outline-offset: 3px;
 }
 
+/* ---------- Poèmes des grands maîtres ---------- */
+.poems {
+  margin-top: 44px;
+  text-align: center;
+  animation: fadeUp .7s var(--ease) both;
+}
+
+.poems[hidden] {
+  display: none;
+}
+
+.poems__star {
+  width: 34px;
+  height: 34px;
+  color: var(--gold);
+  display: block;
+  margin: 0 auto 6px;
+  opacity: .85;
+}
+
+.poems__title {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 7vw, 2.3rem);
+  line-height: 1.1;
+  color: var(--gold-soft);
+  margin: 0 0 8px;
+}
+
+.poems__intro {
+  color: var(--cream-dim);
+  margin: 0 0 16px;
+}
+
+.poems__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto 18px;
+  padding: 5px 14px;
+  background: rgba(8, 22, 31, 0.65);
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  backdrop-filter: blur(8px);
+}
+
+.poems__nav[hidden] {
+  display: none;
+}
+
+.poems__btn {
+  font: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--night-2);
+  color: var(--gold-soft);
+  cursor: pointer;
+  padding: 0;
+  transition: transform .25s var(--ease), background .25s var(--ease), color .25s var(--ease);
+}
+
+.poems__btn:hover {
+  background: var(--gold);
+  color: #1a1407;
+  transform: scale(1.08);
+}
+
+.poems__btn--rand {
+  font-size: 0.95rem;
+  margin-left: 2px;
+  background: rgba(201, 169, 97, 0.12);
+  border-color: rgba(201, 169, 97, 0.35);
+}
+
+.poems__counter {
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--gold-soft);
+  min-width: 60px;
+  text-align: center;
+  user-select: none;
+}
+
+.poems__list {
+  position: relative;
+}
+
+.poem-card {
+  display: none;
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 20px 20px;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  overflow: hidden;
+}
+
+.poem-card.is-active {
+  display: block;
+  animation: fadeUp .5s var(--ease) both;
+}
+
+.poem-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.poem-card__header {
+  margin-bottom: 14px;
+}
+
+.poem-card__title {
+  font-family: var(--font-title);
+  font-size: 1.45rem;
+  color: var(--gold-soft);
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.poem-card__author {
+  font-size: 0.9rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0;
+  opacity: 0.92;
+}
+
+.poem-card__arab {
+  font-family: var(--font-arab);
+  font-size: 1.5rem;
+  line-height: 1.9;
+  color: var(--cream);
+  margin: 12px auto 16px;
+  max-width: 520px;
+  direction: rtl;
+  text-shadow: 0 0 12px rgba(201, 169, 97, 0.25);
+}
+
+.poem-card__verses {
+  margin: 12px 0;
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  font-style: italic;
+  color: var(--cream);
+}
+
+.poem-card__line {
+  margin: 4px 0;
+}
+
+.poem-card__note {
+  margin: 16px 0 0;
+  font-size: 0.85rem;
+  color: var(--cream-dim);
+  opacity: 0.85;
+  border-top: 1px dashed rgba(201, 169, 97, 0.22);
+  padding-top: 10px;
+  font-style: normal;
+}
+
 /* ---------- Vidéos ---------- */
 .videos {
   margin-top: 38px;
