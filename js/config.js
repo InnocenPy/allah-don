@@ -31,6 +31,11 @@ const DAARA_IMAGES = [
     legende: { fr: "La Daara", bm: "Daara" }
   },
   {
+    src: "assets/daara/maitre-samba.jpg",
+    alt: { fr: "Maître SAMBA N'DJOBDY DIALLO, le guide suprême", bm: "Sira jirabaga, « Waati in Kutub »" },
+    legende: { fr: "Le guide ", bm: "Yeelen sira jirabaga belebele" }
+  },
+  {
     src: "assets/daara/kutubula.jpg",
     alt: { fr: "La Daara : le pôle, maître spirituel SAMBA N'DJOBDY DIALLO", bm: "Daara : SAMBA N'DJOBDY DIALLO kutubul wakti" },
     legende: { fr: "Le maître spirituel", bm: "Kutubul wakti" }
